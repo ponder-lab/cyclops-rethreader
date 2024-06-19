@@ -170,11 +170,11 @@ public class Generator<T> implements Iterable<T>, ToStream<T> {
                 local = () -> {
                     setNestedContinutationV(it);
 
-                    return yield(nextA);
+                    return this.yield(nextA);
                 };
             }
 
-            return yield(value);
+            return this.yield(value);
         }
         public Generator<T> yield(T value, Predicate<? super T> predicate){
             return new Generator<T>(this,value,(GeneratorSupplier<T>)local );
@@ -190,7 +190,7 @@ public class Generator<T> implements Iterable<T>, ToStream<T> {
                 return nextA.get();
             };
 
-            return yield(value);
+            return this.yield(value);
         }
         public Generator<T> yield(T value, GeneratorSupplier<T>... next){
             Iterator<GeneratorSupplier<T>> it = Arrays.asList(next).iterator();
@@ -201,7 +201,7 @@ public class Generator<T> implements Iterable<T>, ToStream<T> {
                 return nextA.get();
             };
 
-            return yield(value);
+            return this.yield(value);
         }
         public Generator<T> yieldRef(T value, Supplier<T>... next){
 
@@ -211,17 +211,17 @@ public class Generator<T> implements Iterable<T>, ToStream<T> {
             local = ()->{
                 setNestedContinutationS(it);
 
-                return yield(nextA.get());
+                return this.yield(nextA.get());
             };
 
-            return yield(value);
+            return this.yield(value);
         }
         private  void setNestedContinutationS(Iterator<Supplier<T>> it) {
             if(it.hasNext()) {
                 Supplier<T> nextB = it.next();
                 local = () -> {
                     setNestedContinutationS(it);
-                    return yield(nextB.get());
+                    return this.yield(nextB.get());
 
                 };
             }else{
@@ -233,7 +233,7 @@ public class Generator<T> implements Iterable<T>, ToStream<T> {
                 T nextB = it.next();
                 local = () -> {
                     setNestedContinutationV(it);
-                    return yield(nextB);
+                    return this.yield(nextB);
 
                 };
             }else{

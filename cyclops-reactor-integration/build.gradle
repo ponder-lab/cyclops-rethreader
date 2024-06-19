@@ -68,7 +68,7 @@ javadoc {
 
 task packageTests(type: Jar) {
     from sourceSets.test.output
-    classifier = 'tests'
+    archiveClassifier = 'tests'
 }
 test {
     reports.html.destination = file("$buildDir/reports/test")

@@ -379,13 +379,21 @@ public final class DifferenceList<T> implements Folds<T>,
     }
 
     @Override
-    public <U> DifferenceList<Tuple2<T, U>> zipWithPublisher(Publisher<? extends U> other) {
-        return (DifferenceList<Tuple2<T, U>>)ImmutableList.super.zipWithPublisher(other);
-    }
+public <U> DifferenceList<Tuple2<T, U>> zipWithPublisher(Publisher<? extends U> other) {
+    ImmutableList<Tuple2<T, U>> zipped = ImmutableList.super.zipWithPublisher(other);
+    return fromImmutableList(zipped);
+}
+	
+private static <T> DifferenceList<T> fromImmutableList(ImmutableList<T> list) {
+    return new DifferenceList<>(l -> Trampoline.done(list.appendAll(l)));
+}
+
+
 
     @Override
     public <U> DifferenceList<Tuple2<T, U>> zip(Iterable<? extends U> other) {
-        return (DifferenceList<Tuple2<T, U>>)ImmutableList.super.zip(other);
+        ImmutableList<Tuple2<T, U>> zipped = ImmutableList.super.zip(other);
+        return fromImmutableList(zipped);
     }
 
     @Override
@@ -435,12 +443,14 @@ public final class DifferenceList<T> implements Folds<T>,
 
     @Override
     public <S, U> DifferenceList<Tuple3<T, S, U>> zip3(Iterable<? extends S> second, Iterable<? extends U> third) {
-        return (DifferenceList<Tuple3<T, S, U>>)ImmutableList.super.zip3(second,third);
+        ImmutableList<Tuple3<T, S, U>> zipped = ImmutableList.super.zip3(second,third);
+        return fromImmutableList(zipped);
     }
 
     @Override
     public <T2, T3, T4> DifferenceList<Tuple4<T, T2, T3, T4>> zip4(Iterable<? extends T2> second, Iterable<? extends T3> third, Iterable<? extends T4> fourth) {
-        return (DifferenceList<Tuple4<T, T2, T3, T4>>)ImmutableList.super.zip4(second,third,fourth);
+    	ImmutableList<Tuple4<T, T2, T3, T4>> zipped = ImmutableList.super.zip4(second,third,fourth);
+    	return fromImmutableList(zipped);
     }
 
     @Override
@@ -475,7 +485,8 @@ public final class DifferenceList<T> implements Folds<T>,
 
     @Override
     public <U> DifferenceList<Tuple2<T, U>> zipWithStream(Stream<? extends U> other) {
-        return (DifferenceList<Tuple2<T, U>>)ImmutableList.super.zipWithStream(other);
+        ImmutableList<Tuple2<T, U>> zipped = ImmutableList.super.zipWithStream(other);
+        return fromImmutableList(zipped);
     }
 
     @Override
