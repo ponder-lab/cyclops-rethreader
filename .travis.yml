@@ -1,7 +1,7 @@
 sudo: true
 language: java
 jdk:
-  - openjdk8
+  - openjdk21
 install: ./gradlew clean
 after_success:
   - bash <(curl -s https://codecov.io/bash)
