@@ -12,7 +12,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 21
 jar {
     manifest {
         attributes 'Implementation-Title': 'cyclops-futurestream', 'Implementation-Version': version

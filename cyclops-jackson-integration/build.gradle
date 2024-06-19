@@ -8,7 +8,7 @@ buildscript {
   }
 }
 
-sourceCompatibility = 1.8
+sourceCompatibility = 21
 
 jar {
   manifest {
