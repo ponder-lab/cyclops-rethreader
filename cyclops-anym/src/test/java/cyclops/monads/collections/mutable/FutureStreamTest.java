@@ -77,12 +77,6 @@ public class FutureStreamTest extends AbstractAnyMSeqOrderedDependentTest<future
 
     @Test
     public void testParallelFlatMap() {
-        assertThat(new LazyReact(ThreadPools.getCommonFreeThread()).fromStream(Stream.generate(() -> 1).limit(1000)).parallel()
-                .map(a -> Thread.currentThread().getName()).toSet().size(), greaterThan(1));
-    }
-    
-    @Test
-    public void testParallelFlatMap() {
     	Set<String> threadNames = new LazyReact(ThreadPools.getCommonFreeThread()).fromStream(Stream.generate(() -> 1).limit(1000)).parallel()
         	.map(a -> Thread.currentThread().getName())
         	.toSet();
