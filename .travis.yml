@@ -7,7 +7,8 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 script:
   - ./gradlew assemble
-  - ./gradlew build jacoco --parallel --max-workers 4
+  - ./gradlew build jacocoTestReport --parallel --max-workers 4
+  - ./gradlew build jacocoTestCoverageVerification --parallel --max-workers 4
 
 before_cache:
     - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
