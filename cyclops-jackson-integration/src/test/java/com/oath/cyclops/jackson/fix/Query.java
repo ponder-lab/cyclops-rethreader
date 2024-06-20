@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import jakarta.xml.bind.annotation.XmlElement;
+
+
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode

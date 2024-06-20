@@ -53,14 +53,13 @@ public class LiftTryTest {
 
 	@Test
 	public void testLiftAndStream(){
+    		AnyMFunction2<tryType,Integer,Integer,Integer> divide = AnyM.liftF2(this::divide);
+    		
+    		AnyM<tryType,Integer> result = divide.apply(AnyM.fromTry(Try.success(2, ArithmeticException.class)), Try.success(4).to(AnyM::fromTry));
 
-		AnyMFunction2<tryType,Integer,Integer,Integer> divide = AnyM.liftF2(this::divide);
-
-		AnyM<tryType,Integer> result = divide.apply(AnyM.fromTry(Try.success(2, ArithmeticException.class)), Try.success(4).to(AnyM::fromTry));
-
-		assertThat(result.<Try<List<Integer>,ArithmeticException>>unwrap().orElse(null),equalTo(0));
-
+    		assertThat(result.<Try<Integer,ArithmeticException>>unwrap().orElse(null), equalTo(0));
 	}
+
 
 	@Test(expected=ArithmeticException.class)
 	public void testLiftNoExceptionType(){
