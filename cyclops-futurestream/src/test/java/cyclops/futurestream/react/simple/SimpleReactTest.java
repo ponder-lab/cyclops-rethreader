@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -34,7 +34,7 @@ import org.junit.Test;
 import cyclops.futurestream.LazyReact;
 import cyclops.futurestream.SimpleReact;
 import com.oath.cyclops.types.futurestream.BaseSimpleReactStream;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
 
@@ -514,10 +514,10 @@ public class SimpleReactTest {
 		Mockito.doAnswer((invocation) -> {
 			((Runnable) invocation.getArguments()[0]).run();
 			return null;
-		}).when(executor).execute(Matchers.any(Runnable.class));
+		}).when(executor).execute(ArgumentMatchers.any(Runnable.class));
 
 		new SimpleReact(executor).ofAsync(() -> "Hello", () -> "World").block();
-		Mockito.verify(executor, Mockito.times(2)).execute(Matchers.any(Runnable.class));
+		Mockito.verify(executor, Mockito.times(2)).execute(ArgumentMatchers.any(Runnable.class));
 	}
 
 	@Test

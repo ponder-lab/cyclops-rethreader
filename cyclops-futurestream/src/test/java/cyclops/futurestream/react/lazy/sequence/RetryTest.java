@@ -4,7 +4,7 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyInt;
 
 import java.io.IOException;
 import java.net.SocketException;
@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.BDDMockito;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -95,7 +95,7 @@ public class RetryTest {
 	public void shouldSucceedAfterFewAsynchronousRetries() throws Exception {
 
 
-		BDDMockito.given(serviceMock.apply(Matchers.anyInt())).willThrow(
+		BDDMockito.given(serviceMock.apply(ArgumentMatchers.anyInt())).willThrow(
 				new RuntimeException(new SocketException("First")),
 				new RuntimeException(new IOException("Second"))).willReturn(
 				"42");
@@ -123,7 +123,7 @@ public class RetryTest {
 
 
 
-		BDDMockito.given(serviceMock.apply(Matchers.anyInt())).willThrow(
+		BDDMockito.given(serviceMock.apply(ArgumentMatchers.anyInt())).willThrow(
 				new RuntimeException("DONT PANIC"));
 
 
@@ -144,7 +144,7 @@ public class RetryTest {
 			throws Exception {
 		error = null;
 
-		BDDMockito.given(serviceMock.apply(Matchers.anyInt())).willThrow(
+		BDDMockito.given(serviceMock.apply(ArgumentMatchers.anyInt())).willThrow(
 				new IllegalArgumentException("DONT PANIC"));
 
 
