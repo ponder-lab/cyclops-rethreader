@@ -82,7 +82,9 @@ public class FutureStreamTest extends AbstractAnyMSeqOrderedDependentTest<future
         	.toSet();
 
     // Debugging output
+    System.out.println("Available processors: " + Runtime.getRuntime().availableProcessors());
     System.out.println("Thread names: " + threadNames);
+    System.out.println("Thread count: " + threadNames.size());
 
     assertThat(threadNames.size(), greaterThan(1));
 }

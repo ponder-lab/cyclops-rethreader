@@ -47,7 +47,7 @@ task packageTests(type: Jar) {
 test {
     reports.html.destination = file("$buildDir/reports/test")
     testLogging {
-        events "started", "passed", "skipped", "failed"//, "standardOut", "standardError"
+        events "started", "passed", "skipped", "failed", "standardOut", "standardError"
     }
 }
 
