@@ -33,7 +33,6 @@ import lombok.experimental.UtilityClass;
 import java.util.function.Function;
 
 import static cyclops.control.Eval.narrowK;
-import static javafx.scene.input.KeyCode.T;
 
 /**
  * Companion class for creating Type Class instances for working with Evals
