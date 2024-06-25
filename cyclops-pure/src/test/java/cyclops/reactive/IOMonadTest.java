@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.BDDMockito;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.reactivestreams.Publisher;
@@ -168,7 +168,7 @@ public class IOMonadTest {
     public void shouldSucceedAfterFewAsynchronousRetries() throws Exception {
 
 
-        BDDMockito.given(serviceMock.apply(Matchers.anyInt())).willThrow(
+        BDDMockito.given(serviceMock.apply(ArgumentMatchers.anyInt())).willThrow(
             new RuntimeException(new SocketException("First")),
             new RuntimeException(new IOException("Second"))).willReturn(
             "42");
@@ -196,7 +196,7 @@ public class IOMonadTest {
 
 
 
-        BDDMockito.given(serviceMock.apply(Matchers.anyInt())).willThrow(
+        BDDMockito.given(serviceMock.apply(ArgumentMatchers.anyInt())).willThrow(
             new RuntimeException("DONT PANIC"));
 
 

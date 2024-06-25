@@ -264,6 +264,10 @@ public interface CollectionX<T> extends IterableX<T>,
                         .newInstance(a.getClass().getComponentType(), i));
     }
     @Override
+    default <R> R[] toArray(IntFunction<R[]> generator) {
+        return stream().toArray(generator);
+    }
+    @Override
     int size();
 
 

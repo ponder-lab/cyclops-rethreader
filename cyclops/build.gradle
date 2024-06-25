@@ -11,8 +11,8 @@ apply from: custom('jacoco-version')
 apply from: custom('jacoco-config')
 apply from: custom('jacoco-excludes')
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 21
+targetCompatibility = 21
 
 jar {
     manifest {
@@ -86,7 +86,7 @@ test {
     }
     minHeapSize = "512m" // initial heap size
     maxHeapSize = "1024m" // maximum heap size
-    jvmArgs '-XX:MaxPermSize=256m' // mem argument for the test JVM
+    jvmArgs '-XX:MaxMetaspaceSize=256m' // mem argument for the test JVM
 
 }
 
@@ -95,7 +95,7 @@ test {
 }
 task packageTests(type: Jar) {
     from sourceSets.test.output
-    classifier = 'tests'
+    archiveClassifier = 'tests'
 }
 
 artifacts.archives packageTests

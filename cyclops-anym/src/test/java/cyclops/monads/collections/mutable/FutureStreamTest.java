@@ -36,6 +36,7 @@ import java.util.stream.Stream;
 import cyclops.monads.AnyM;
 import cyclops.reactive.collections.mutable.ListX;
 
+import java.util.Set;
 
 public class FutureStreamTest extends AbstractAnyMSeqOrderedDependentTest<futureStream> {
 
@@ -76,9 +77,17 @@ public class FutureStreamTest extends AbstractAnyMSeqOrderedDependentTest<future
 
     @Test
     public void testParallelFlatMap() {
-        assertThat(new LazyReact(ThreadPools.getCommonFreeThread()).fromStream(Stream.generate(() -> 1).limit(1000)).parallel()
-                .map(a -> Thread.currentThread().getName()).toSet().size(), greaterThan(1));
-    }
+    	Set<String> threadNames = new LazyReact(ThreadPools.getCommonFreeThread()).fromStream(Stream.generate(() -> 1).limit(1000)).parallel()
+        	.map(a -> Thread.currentThread().getName())
+        	.toSet();
+
+    // Debugging output
+    System.out.println("Available processors: " + Runtime.getRuntime().availableProcessors());
+    System.out.println("Thread names: " + threadNames);
+    System.out.println("Thread count: " + threadNames.size());
+
+    assertThat(threadNames.size(), greaterThan(1));
+}
 
 }
 
